@@ -2,7 +2,7 @@
 import xlrd,xlwt
 import readWord
 
-C=["case_id","checkname","method","url","params","checkpoint","sample"]
+C=["case_id","checkname","method","url","params","checkpoint"]
 
 
 class writeExcel():
@@ -32,7 +32,7 @@ class writeExcel():
                 dictname["url"]=self.tables[i]["url"]
                 dictname["params"]=(self.tables[i]['params'])
                 dictname["checkpoint"]=self.tables[i]['checkpoint']
-                dictname["sample"]=(self.tables[i]['sample'])
+                #dictname["sample"]=(self.tables[i]['sample'])
             self.write_excel(num,dictname)
         self.wb.save(self.filename+'.xlsx')
 

@@ -160,7 +160,7 @@ class WordUtil():
         dict[testdata[3]] = t.get_checkpoint()
         #去掉样例
         #dict[testdata[4]] = t._get_samplename()
-        dict[testdata[5]]=t.get_name()
+        dict[testdata[4]]=t.get_name()
         return dict
     # def close_word(self):
     #     self.document.Quit()
