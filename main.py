@@ -1,6 +1,11 @@
 #coding=utf-8
 from common import readWord,writeExcel
 import os
+import sys
+
+if sys.getdefaultencoding()!='utf-8':
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
 
 #获取需要转的文档
 def get_file_list(filepath):

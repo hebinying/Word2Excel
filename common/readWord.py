@@ -129,7 +129,7 @@ class WordTable():
 
 
 data=["wordname","wordpath","tablenumber","content"]
-testdata=["method","url","params","checkpoint","sample","testcasename"]
+testdata=["method","url","params","checkpoint","testcasename"]
 class WordUtil():
     def __init__(self,path):
         self.path=path
@@ -158,7 +158,8 @@ class WordUtil():
         dict[testdata[1]] = t.get_url()
         dict[testdata[2]] = t.get_params()
         dict[testdata[3]] = t.get_checkpoint()
-        dict[testdata[4]] = t._get_samplename()
+        #去掉样例
+        #dict[testdata[4]] = t._get_samplename()
         dict[testdata[5]]=t.get_name()
         return dict
     # def close_word(self):
