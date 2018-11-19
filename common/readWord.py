@@ -2,6 +2,7 @@
 from docx import Document
 import os
 from constant import HOST,HOST_NEED_CHANGE
+import re
 from docx.shared import Inches
 
 
@@ -24,7 +25,9 @@ class WordTable():
 
     #获取方法
     def get_method(self):
-        if "方法" not in self.table.cell(2,4).text:
+        zhmodel = re.compile(u'[\u4e00-\u9fa5]')#检查中文
+        match = zhmodel.search(self.table.cell(2,4).text)
+        if match:
             name=self.table.cell(2,4).text
         else:
             name=self.table.cell(2,5).text
@@ -44,7 +47,7 @@ class WordTable():
     #返回参数组合
     def get_params(self):
         start=end=0
-        paramname=u"请求协议"
+        paramname=[u"请求协议",u"请求参数"]
         row_list=self.table.rows
         for i,row in enumerate(row_list):
             if self.table.cell(i,0).text in paramname:
@@ -54,7 +57,7 @@ class WordTable():
                     end=i
                 else:
                     end=i
-        param_list=self.get_param(start+2,end)
+        param_list=self.get_param(start+2,end+1)
 
         return param_list
 
@@ -71,7 +74,7 @@ class WordTable():
                     end = i
                 else:
                     end = i
-        checkpoint_list = self.get_param(start, end)
+        checkpoint_list = self.get_param(start, end+1)
 
         return checkpoint_list
 
@@ -101,10 +104,13 @@ class WordTable():
         str = ""
         num = 6
         for i in range(1, num):
+
             if i == 2:
-                str += '//'
-            if i == 1:
-                str += "'" + self.table.cell(rownum, i).text + "':"
+                str += ',#'
+            elif i == 1:
+                str += "\n'" + self.table.cell(rownum, i).text + "':"
+            elif i==num:
+                str += self.table.cell(rownum, i).text
             else:
                 str += self.table.cell(rownum, i).text
         return str

@@ -1,6 +1,7 @@
 #coding=utf-8
 from common import readWord,writeExcel
 import os
+
 #获取需要转的文档
 def get_file_list(filepath):
     dirs=os.listdir(filepath)
@@ -38,14 +39,13 @@ if __name__=="__main__":
         filepath=path.decode("utf-8").encode("gbk")
         if os.path.isdir(filepath):
             dirs=get_file_list(filepath)
-            print dirs
+            print "需要转的文件总数为：%d"%len(dirs)
             for dir in dirs:
                 print dir.decode("gbk")
                 change_file(dir)
         elif os.path.isfile(filepath):
             if "docx" in os.path.splitext(filepath)[1]:
                 change_file(filepath)
-                print "转文件"
             else:
                 print "输入文件不是docx格式文件，请重试"
         else:
