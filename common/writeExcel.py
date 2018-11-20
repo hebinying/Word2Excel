@@ -10,6 +10,20 @@ class writeExcel():
         self.datas=datas
         self.wb=xlwt.Workbook()
         self.sheet=self.wb.add_sheet((datas["wordname"]).decode("gbk"))
+        #############
+        self.col0=self.sheet.col(0)
+        self.col1 = self.sheet.col(1)
+        self.col2 = self.sheet.col(2)
+        self.col3 = self.sheet.col(3)
+        self.col4 = self.sheet.col(4)
+        self.col5 = self.sheet.col(5)
+        self.col0.width=230*10
+        self.col1.width = 300 * 20
+        self.col2.width = 230 * 10
+        self.col3.width = 300 * 25
+        self.col4.width = 300 * 25
+        self.col5.width = 300 * 30
+        ############
         #分解数据
         self.filename=datas["wordname"]
         self.filepath=datas["wordpath"]
@@ -37,9 +51,18 @@ class writeExcel():
         self.wb.save(self.filename+'.xlsx')
 
     def write_excel(self,rownum,data):
+        ###############增加自动换行格式
+        alignment = xlwt.Alignment()
+        # alignment.horz = xlwt.Alignment.HORZ_CENTER
+        alignment.wrap = xlwt.Alignment.WRAP_AT_RIGHT
+        alignment.vert = xlwt.Alignment.VERT_CENTER
+        style = xlwt.XFStyle()
+        style.alignment = alignment
+        ###########
+
         for i in range(len(C)):
             # print data[C[i]]
-            self.sheet.write(rownum,i,data[C[i]])
+            self.sheet.write(rownum,i,data[C[i]],style)
 
 
 
